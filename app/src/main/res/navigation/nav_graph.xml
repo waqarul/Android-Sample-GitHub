@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.wtmcodex.androidsamplegithub.features.home.HomeFragment"
+        android:label="@string/home_title"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_gitHubRepositoryDetailFragment"
+            app:destination="@id/gitHubRepositoryDetailFragment">
+            <argument
+                android:name="gitHubRepository"
+                app:argType="com.wtmcodex.androidsamplegithub.core.data.model.GitHubRepositoryModel" />
+
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/gitHubRepositoryDetailFragment"
+        android:name="com.wtmcodex.androidsamplegithub.features.repositorydetail.GitHubRepositoryDetailFragment"
+        android:label="@string/github_repository_detail_title">
+        <argument
+            android:name="gitHubRepository"
+            app:argType="com.wtmcodex.androidsamplegithub.core.data.model.GitHubRepositoryModel" />
+    </fragment>
+</navigation>

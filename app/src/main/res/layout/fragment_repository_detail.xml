@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="gitHubRepository"
+            type="com.wtmcodex.androidsamplegithub.core.data.model.GitHubRepositoryModel" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/w2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/w2"
+            android:layout_marginTop="@dimen/w2"
+            android:layout_marginEnd="@dimen/w2"
+            android:layout_marginBottom="@dimen/w2">
+
+
+            <TextView
+                android:id="@+id/tv_name_label"
+                style="@style/TextView.Headline9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/github_repository_detail_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_bookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/h2"
+                android:paddingEnd="@dimen/h2"
+                android:paddingBottom="@dimen/h2"
+                android:src="@drawable/star_unfilled"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/TextView.Text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/h1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{gitHubRepository.name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_name_label"
+                tools:text="XYZ Name" />
+
+            <TextView
+                android:id="@+id/tv_full_name_label"
+                style="@style/TextView.Headline9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/h3"
+                android:text="@string/github_repository_detail_full_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+            <TextView
+                android:id="@+id/tv_full_name"
+                style="@style/TextView.Text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/h1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{gitHubRepository.fullName}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_full_name_label"
+                tools:text="Full Name" />
+
+
+            <TextView
+                android:id="@+id/tv_stars_count_label"
+                style="@style/TextView.Headline9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/h3"
+                android:text="@string/github_repository_detail_stars_count"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_full_name" />
+
+            <TextView
+                android:id="@+id/tv_stars_count"
+                style="@style/TextView.Text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/h1"
+                android:drawablePadding="@dimen/w1"
+                android:ellipsize="end"
+                android:text="@{String.valueOf(gitHubRepository.starsCount)}"
+                app:drawableStartCompat="@drawable/star"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_stars_count_label"
+                tools:text="1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>
