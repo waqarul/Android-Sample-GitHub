@@ -1,5 +1,5 @@
 # Android Sample GitHub Repository Kotlin
-This project make use of API to fetch Repositories for  [Square Inc.](https://api.github.com/orgs/square/repos)
+This project make use of API to fetch Repositories for  [Square Inc.](https://api.github.com/orgs/square/repos) It also mark the favorite repositories.
 
 ### Tech Stack
 The following are used in the project:
