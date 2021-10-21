@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.wtmcodex.androidsamplegithub.BuildConfig
+import com.wtmcodex.androidsamplegithub.R
 import com.wtmcodex.androidsamplegithub.constants.APIConstants
 import com.wtmcodex.androidsamplegithub.core.data.source.remote.retrofit.GitHubRepositoryApiService
 import dagger.Module
@@ -45,11 +46,15 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideRetrofitBuilder(
-        client: OkHttpClient?,
-        context: Context?
+        client: OkHttpClient,
+        context: Context
     ): Retrofit {
+        val baseApiUrl: String = context.getString(R.string.base_url)
+        val path: String = context.getString(R.string.path)
+        val baseUrl = String.format("%s/%s/", baseApiUrl, path)
+
         return Retrofit.Builder()
-            .baseUrl(APIConstants.BASE_URL)
+            .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

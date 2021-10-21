@@ -50,8 +50,6 @@ class GitHubRepositoryDetailFragment : BaseFragment() {
     }
 
     override fun loadData() {
-        viewModel.loadData(arguments)
-
         val args = GitHubRepositoryDetailFragmentArgs.fromBundle(requireArguments())
         viewModel.updateData(args.gitHubRepository)
     }

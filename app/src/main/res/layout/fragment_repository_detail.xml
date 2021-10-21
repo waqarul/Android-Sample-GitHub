@@ -24,14 +24,14 @@
             android:layout_marginEnd="@dimen/w2"
             android:layout_marginBottom="@dimen/w2">
 
-
             <TextView
                 android:id="@+id/tv_name_label"
                 style="@style/TextView.Headline9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/github_repository_detail_name"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@id/iv_bookmark"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

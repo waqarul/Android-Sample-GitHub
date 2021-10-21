@@ -8,5 +8,4 @@ import com.wtmcodex.androidsamplegithub.core.data.source.local.entity.DBGitHubRe
 @Database(entities = [DBGitHubRepository::class], version = 1, exportSchema = false)
 abstract class GitHubRepositoryDatabase : RoomDatabase() {
     abstract fun repositoryDao(): GitHubRepositoryDao
-
 }

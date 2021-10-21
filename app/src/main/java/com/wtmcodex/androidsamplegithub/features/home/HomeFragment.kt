@@ -7,11 +7,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wtmcodex.androidsamplegithub.R
 import com.wtmcodex.androidsamplegithub.core.data.model.AlertModel
 import com.wtmcodex.androidsamplegithub.databinding.FragmentHomeBinding
 import com.wtmcodex.androidsamplegithub.features.BaseFragment
 import com.wtmcodex.androidsamplegithub.features.home.adapter.GitHubRepositoryRecyclerViewAdapter
 import com.wtmcodex.androidsamplegithub.features.home.adapter.GitHubRepositoryViewItem
+import com.wtmcodex.androidsamplegithub.helpers.Utils
 
 class HomeFragment : BaseFragment() {
     private var binding: FragmentHomeBinding? = null
@@ -64,10 +66,18 @@ class HomeFragment : BaseFragment() {
                         binding!!.rvRepository.adapter as GitHubRepositoryRecyclerViewAdapter?
                     adapter!!.setViewItems(viewItems)
                 })
-            showAlertDialog.observe(viewLifecycleOwner, { alertModel: AlertModel? ->
-                showAlert(
-                    alertModel!!
-                )
+
+            showErrorAlertDialog.observe(viewLifecycleOwner, { shouldShowErrorAlert ->
+                if (shouldShowErrorAlert) {
+                    showAlert(
+                        AlertModel(
+                            title = requireActivity().getString(R.string.title_error_in_request),
+                            message = requireActivity().getString(R.string.message_error_in_request),
+                            positiveButtonTitle = requireActivity().getString(R.string.alert_ok_label)
+                        )
+                    )
+                }
+
             })
         }
 
@@ -81,7 +91,7 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun loadData() {
-        viewModel.loadData(arguments)
+        doApiCall(true)
     }
 
     private fun setupRecyclerView() {
@@ -115,10 +125,25 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun doOnRefresh() {
-        doApiCall()
+        doApiCall(false)
     }
 
-    private fun doApiCall() {
-        viewModel.makeRequestToFetchRepositories(false)
+    private fun doApiCall(showLoading: Boolean) {
+        if (!Utils.isNetworkAvailable(requireContext())) {
+            showAlert(
+                AlertModel(
+                    title = requireActivity().getString(R.string.title_no_internet_connection),
+                    message = requireActivity().getString(R.string.message_no_internet_connection),
+                    positiveButtonTitle = requireActivity().getString(R.string.alert_ok_label)
+                )
+            )
+
+            binding!!.pbLoading.visibility = View.GONE
+            binding!!.tvNoResult.visibility = View.VISIBLE
+            binding!!.rvRepository.visibility = View.GONE
+            binding!!.srLayout.isRefreshing = false
+            return
+        }
+        viewModel.loadData(showLoading)
     }
 }

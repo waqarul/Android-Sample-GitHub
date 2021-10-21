@@ -1,7 +1,6 @@
 package com.wtmcodex.androidsamplegithub
 
 import android.app.Application
-import com.wtmcodex.androidsamplegithub.core.Domain
 import com.wtmcodex.androidsamplegithub.core.di.AppInjector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -13,7 +12,6 @@ class GitHubApplication : Application(), HasAndroidInjector {
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
     override fun onCreate() {
         super.onCreate()
-        Domain.getInstance(this)
         AppInjector.init(this)
     }
 

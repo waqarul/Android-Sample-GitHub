@@ -1,13 +1,10 @@
 package com.wtmcodex.androidsamplegithub.features
 
-import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.wtmcodex.androidsamplegithub.core.data.model.AlertModel
+import com.wtmcodex.androidsamplegithub.helpers.asLiveData
 
 abstract class BaseViewModel : ViewModel() {
-    var showAlertDialog = MutableLiveData<AlertModel>()
-        protected set
-
-    protected abstract fun loadData(params: Bundle?)
+    protected val _showErrorAlertDialog = MutableLiveData<Boolean>()
+    val showErrorAlertDialog = _showErrorAlertDialog.asLiveData()
 }

@@ -1,15 +1,12 @@
 package com.wtmcodex.androidsamplegithub.features.home
 
-import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wtmcodex.androidsamplegithub.core.data.model.GitHubRepositoryModel
 import com.wtmcodex.androidsamplegithub.core.data.source.repository.GitHubRepository
 import com.wtmcodex.androidsamplegithub.features.BaseViewModel
 import com.wtmcodex.androidsamplegithub.features.home.adapter.GitHubRepositoryViewItem
-import com.wtmcodex.androidsamplegithub.helpers.AlertMessagesHelper
 import com.wtmcodex.androidsamplegithub.helpers.Result
-import com.wtmcodex.androidsamplegithub.helpers.Utils
 import com.wtmcodex.androidsamplegithub.helpers.asLiveData
 import kotlinx.coroutines.launch
 import java.util.*
@@ -33,22 +30,15 @@ class HomeViewModel @Inject constructor(private val repository: GitHubRepository
 
     private val gitHubRepositoryModelList = ArrayList<GitHubRepositoryModel>()
 
-    public override fun loadData(params: Bundle?) {
-        makeRequestToFetchRepositories(true)
+    fun loadData(showLoading: Boolean = true) {
+        makeRequestToFetchRepositories(showLoading)
     }
 
-    fun makeRequestToFetchRepositories(showLoading: Boolean) {
+    private fun makeRequestToFetchRepositories(showLoading: Boolean) {
         makeRequest(showLoading)
     }
 
     private fun makeRequest(showLoading: Boolean) {
-        if (!Utils.isNetworkAvailable()) {
-            showAlertDialog.postValue(
-                AlertMessagesHelper.getNoInternetConnectionAlertModel(null)
-            )
-            resetView()
-            return
-        }
         if (showLoading) {
             _isLoading.postValue(true)
         }
@@ -69,9 +59,7 @@ class HomeViewModel @Inject constructor(private val repository: GitHubRepository
                 }
                 is Result.Error -> {
                     resetView()
-                    showAlertDialog.postValue(
-                        AlertMessagesHelper.getAlertMessageFromError(null)
-                    )
+                    _showErrorAlertDialog.postValue(true)
                 }
 
                 is Result.Loading -> _isLoading.value = true

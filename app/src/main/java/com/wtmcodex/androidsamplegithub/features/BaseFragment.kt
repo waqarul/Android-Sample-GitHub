@@ -36,12 +36,12 @@ abstract class BaseFragment : Fragment(), Injectable {
             .setCancelable(false)
             .setPositiveButton(alertModel.positiveButtonTitle) { dialog, which ->
                 if (alertModel.listener != null) {
-                    alertModel.listener.onPositiveButtonClickAction(alertModel.errorType)
+                    alertModel.listener.onPositiveButtonClickAction()
                 }
             }
             .setNegativeButton(alertModel.negativeButtonTitle) { dialog, which ->
                 if (alertModel.listener != null) {
-                    alertModel.listener.onNegativeButtonClickAction(alertModel.errorType)
+                    alertModel.listener.onNegativeButtonClickAction()
                 }
             }
         val dialog = builder.create()

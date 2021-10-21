@@ -1,6 +1,5 @@
 package com.wtmcodex.androidsamplegithub.features.repositorydetail
 
-import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wtmcodex.androidsamplegithub.core.data.model.GitHubRepositoryModel
@@ -16,9 +15,6 @@ class GitHubRepositoryDetailViewModel @Inject constructor(private val repository
     val gitHubRepository = _gitHubRepository.asLiveData()
 
     lateinit var gitHubRepositoryDetail: GitHubRepositoryModel
-
-    public override fun loadData(params: Bundle?) {
-    }
 
     fun updateData(gitHubRepositoryModel: GitHubRepositoryModel) {
         viewModelScope.launch {

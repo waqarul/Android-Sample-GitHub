@@ -27,4 +27,4 @@ class GitHubRepositoryRemoteDataSourceImpl @Inject constructor(
                 Result.Error(exception)
             }
         }
-}
+    }
